@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+test-results/
+playwright-report/
+*.tsbuildinfo
+public/pdf.worker.min.mjs
+.env*
+!.env.example
+.dev.vars*
+.wrangler/
+delivery/

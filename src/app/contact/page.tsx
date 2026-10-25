@@ -1,0 +1,2 @@
+export const metadata={title:'문의',alternates:{canonical:'/contact/'}};
+export default function Contact(){const email=process.env.NEXT_PUBLIC_CONTACT_EMAIL;return <article className="article"><h1>문의</h1><p>오류나 개선 의견을 알려 주세요. 개인정보가 담긴 원본 파일은 보내지 마세요.</p>{email?<p><a href={`mailto:${email}`}>{email}</a></p>:<p>현재 비공개 MVP 검증 단계로 문의 주소가 아직 설정되지 않았습니다. 공개 운영 전 문의 채널을 등록할 예정입니다.</p>}<h2>오류를 설명할 때</h2><ul><li>사용한 도구와 선택한 설정</li><li>브라우저 이름과 운영체제</li><li>파일 형식, 대략적인 용량과 페이지 수</li><li>화면에 표시된 오류 문구</li></ul><p>현재 이 페이지에는 문의 내용을 전송하는 양식이 없습니다.</p></article>}
