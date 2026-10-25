@@ -12,6 +12,7 @@ Next.js App Router + strict TypeScript + Tailwind CSS 4. `output: export`와 tra
 - `src/lib/pdf.ts`: pdf-lib로 실제 문서를 읽고 페이지 복사. PDF.js는 출력 문서 첫 페이지를 로컬 worker로 렌더링한다. 라이브러리는 필요할 때 동적 로드.
 - `src/components/workbench.tsx`: 선택/설정/처리/완료/오류 UI. 설정·파일 변경 시 이전 결과를 즉시 무효화. 작업 중 입력을 잠가 중복 처리를 막음. 취소는 결과 발행을 무효화하며 동기 라이브러리 호출을 강제 종료하지 않는다.
 - `src/app`: 검색 가능한 정적 도구 설명, 가이드, 정책, 메타데이터, sitemap, robots.
+- `scripts/csp.mjs`: 정적 빌드의 실행 스크립트 해시를 페이지별로 계산하고 CSP 헤더 및 404 대체 응답용 메타 정책을 생성한다. 인라인 JavaScript 전체 허용은 제거했다. 상세 설계와 한계는 SECURITY.md 참조.
 - `public/_headers`: Cloudflare Pages용 CSP/보안 헤더. preview 서버도 동일 헤더 사용. PDF worker와 이미지 Blob만 허용하고 connect-src를 self로 제한.
 
 ## 안정성과 한계

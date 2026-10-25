@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/prepare.mjs && next dev --webpack",
-    "build": "node scripts/prepare.mjs && next build --webpack",
+    "build": "node scripts/prepare.mjs && next build --webpack && node scripts/csp.mjs",
     "start": "node scripts/serve.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",

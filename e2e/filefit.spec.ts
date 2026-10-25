@@ -36,3 +36,23 @@ test('all static pages and metadata exist',async({page})=>{
  for(const route of ['/guides/','/privacy/','/terms/','/contact/','/tools/image-compress/','/tools/image-resize/']) {const response=await page.goto(route);expect(response?.status()).toBe(200);await expect(page.locator('h1')).toBeVisible();await expect(page.locator('link[rel=canonical]')).toHaveCount(1);}
  expect((await page.request.get('/sitemap.xml')).status()).toBe(200);expect((await page.request.get('/robots.txt')).status()).toBe(200);
 });
+
+
+test('CSP allows trusted hydration and blocks injected inline scripts and handlers',async({page})=>{
+ const response=await page.goto('/');
+ const csp=response?.headers()['content-security-policy']??'';
+ const scriptDirective=csp.split(/[,;]/).map(s=>s.trim()).find(s=>s.startsWith('script-src '));
+ expect(scriptDirective).toContain('sha256-');
+ expect(scriptDirective).not.toContain('unsafe-inline');
+ await expect(page.locator('meta[name="google-site-verification"]')).toHaveAttribute('content','LTbd_7OkZNDe5hj1vvWOD1cTn5SpoxK9fDK3e_YsHFQ');
+ await page.getByRole('button',{name:'내 설정 공유 링크'}).click();
+ await expect(page.getByLabel('설정 공유 URL')).toBeVisible();
+ await page.evaluate(()=>{
+   const script=document.createElement('script');script.textContent='document.documentElement.dataset.injectedScript="yes"';document.head.appendChild(script);
+   const button=document.createElement('button');button.setAttribute('onclick','document.documentElement.dataset.injectedHandler="yes"');document.body.appendChild(button);button.click();button.remove();
+ });
+ expect(await page.locator('html').getAttribute('data-injected-script')).toBeNull();
+ expect(await page.locator('html').getAttribute('data-injected-handler')).toBeNull();
+ await page.getByRole('link',{name:'사용 가이드',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'파일 제출, 차근차근',exact:true})).toBeVisible();
+});
