@@ -8,3 +8,5 @@ export const tools = [
 ] as const;
 export type ToolSlug = typeof tools[number]['slug'];
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://filefit.example').replace(/\/$/,'');
+
+export const isIndexable = Boolean(process.env.NEXT_PUBLIC_SITE_URL) && process.env.NEXT_PUBLIC_ALLOW_INDEXING === 'true';
