@@ -24,6 +24,6 @@ PDF의 손상·암호화·페이지 상한을 검사한다. PDF parser의 내부
 
 ## SEO 및 광고 확장
 
-운영 URL이 없을 때 example 도메인을 임시 메타데이터로 쓰며 robots/noindex로 검색을 막는다. 환경변수 지정 후 다시 빌드해야 canonical/sitemap이 바뀐다. 설정 URL 해시는 canonical에 포함하지 않아 사용자 설정별 중복 색인을 피한다.
+운영 URL이 없을 때 example 도메인을 임시 메타데이터로 쓰며 robots/noindex로 검색을 막는다. 운영 URL 환경변수 지정 후 다시 빌드해야 canonical/sitemap이 바뀐다. 검색 색인은 NEXT_PUBLIC_ALLOW_INDEXING=true도 별도로 지정해야 허용된다. 설정 URL 해시는 canonical에 포함하지 않아 사용자 설정별 중복 색인을 피한다.
 
 광고는 현재 존재하지 않는다. 도구와 가이드의 별도 section 구조에 나중에 추가할 수 있다. 도입 시 CSP 허용 목록·개인정보 안내·동의·CLS 여유 공간을 함께 설계하고 변환 이벤트에 파일 정보를 붙이지 않는다.

@@ -1,5 +1,8 @@
 # FileFit
 
+공개 베타: https://filefit-59l.pages.dev/
+소스: https://github.com/sfd1033/filefit
+
 한국어 브라우저 전용 이미지·PDF 도구 MVP. 원본/결과 업로드, AI API, 계정, DB, 결제, 광고 코드 없음.
 
 ## 실행
@@ -33,4 +36,4 @@ npm run test:e2e
 
 실행 근거와 제한: [검증 보고서](docs/VALIDATION.md). 요구사항: [PRD](docs/PRD.md), [아키텍처](docs/ARCHITECTURE.md), [인수 기준](docs/ACCEPTANCE.md), [배포](docs/DEPLOYMENT.md).
 
-기본 빌드는 검색 차단 상태다. 실제 도메인 및 문의 이메일을 설정하고 공개 운영 문서를 완성한 다음 출시한다. 테스트와 설정 링크에 원본 파일이 포함되지 않는다.
+기본 빌드는 검색 차단 상태다. 실제 도메인 및 문의 이메일을 설정하고 운영 문서를 완성한 다음 NEXT_PUBLIC_ALLOW_INDEXING=true로 재빌드하면 검색 색인이 허용된다. 테스트와 설정 링크에 원본 파일이 포함되지 않는다.

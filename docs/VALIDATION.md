@@ -45,3 +45,20 @@ PDF.js 최신 버전에서 제거된 옵션을 제거하고 타입 검증을 통
 PDF 처리는 메인 스레드의 pdf-lib를 사용하므로 큰/복잡한 문서의 즉각적인 중단과 메모리 상한을 강제하지 못한다. 취소는 결과 발행을 무효화하고 내부 처리가 끝날 때까지 입력을 잠근다. 공개 대규모 운영 전 별도 변환 worker와 실기기 스트레스 검증을 권장한다.
 
 현재 도메인/운영자/문의 주소가 미설정된 비공개 검증용 상태다. noindex/robots 차단 상태의 정적 배포 파일이 제공되며 출시 전 실제 값으로 재빌드해야 한다. PDF 내용/메타데이터는 개인정보 제거를 보장하지 않는다.
+
+
+## Cloudflare 실배포 검증 (2026-10-25)
+
+- URL: https://filefit-59l.pages.dev/
+- 최초 배포 SHA: 679670a678d9c06b055e9108a7265ec6373ff6c6
+- GitHub Actions: https://github.com/sfd1033/filefit/actions/runs/40179300178 — success. Linux Node 24 환경에서 타입/린트/12개 단위 테스트/정적 빌드/8개 Chromium 브라우저 테스트 전체 완료.
+- Cloudflare 대시보드에서 Success 및 프로젝트 영구 URL 확인. main 저장소 Git 연동 배포다.
+- 실제 호스트에서 홈/도구 6종/가이드/개인정보/약관/문의/robots/sitemap/로컬 PDF worker 모두 HTTP 200. 존재하지 않는 URL은 404.
+- CSP, X-Content-Type-Options: nosniff, X-Frame-Options: DENY 응답 확인. canonical과 sitemap은 실제 pages.dev 원점 사용, example 도메인 없음.
+- 공개 베타는 noindex 및 robots Disallow 상태. 운영자/문의 정보를 완료한 뒤 NEXT_PUBLIC_ALLOW_INDEXING=true를 Production에 설정하고 재빌드해야 검색이 허용된다.
+- 공개 사이트의 합성 PNG 600×800 입력 → 실제 다운로드 JPG 300×400, 5,919바이트. 브라우저 이미지 naturalWidth/naturalHeight와 JPEG 바이트 서명 확인.
+- 합성 PDF 2개(페이지 폭 300/400과 500) 합치기 → 실제 다운로드 601바이트, 3페이지, 폭 [300,400,500]. PDF.js 미리보기 정상, 콘솔 오류 없음.
+- 해당 결과의 3,1 페이지 추출 → 실제 다운로드 588바이트, 2페이지, 폭 [500,300]. 다운로드 파일을 로컬 pdf-lib로 다시 파싱하여 순서까지 확인.
+- 화면 증거와 합성 입력은 로컬 delivery 폴더에 보관하며 Git 업로드 대상에서 제외했다.
+
+앞의 '아직 검증하지 않은 사항' 중 실제 Cloudflare/GitHub 배포와 CI 실행은 이 절의 결과로 대체한다. 실물 모바일·Safari/Firefox·검색 색인·광고 심사는 여전히 미검증이다. 공개 운영자/문의 정보는 아직 미등록이다.

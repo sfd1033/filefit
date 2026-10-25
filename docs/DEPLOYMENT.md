@@ -1,6 +1,18 @@
 # GitHub / Cloudflare Pages 배포
 
-현재 산출물은 로컬 정적 사이트다. GitHub 원격 저장소 생성 또는 Cloudflare 배포를 실행하지 않았다. 기존 작업 폴더는 다른 프로젝트를 포함하므로 filefit 폴더만 독립 저장소로 준비한다.
+현재 공개 베타가 Cloudflare Pages에 배포되어 있다. 소스와 자동 검증은 GitHub에 연결했다.
+
+- 서비스: https://filefit-59l.pages.dev/
+- 저장소: https://github.com/sfd1033/filefit
+- Cloudflare 프로젝트: filefit / production branch: main
+- 프리셋: Next.js (Static HTML Export), build: npm run build, output: out, root: 저장소 루트
+- 빌드 환경: NODE_VERSION=24, NEXT_TELEMETRY_DISABLED=1, NEXT_PUBLIC_SITE_URL=https://filefit-59l.pages.dev
+- 최초 배포 커밋: 679670a678d9c06b055e9108a7265ec6373ff6c6
+- 해당 커밋의 GitHub 자동 검증: https://github.com/sfd1033/filefit/actions/runs/40179300178 (success)
+- 운영자/문의/정책 확인이 끝날 때까지 검색 차단. NEXT_PUBLIC_ALLOW_INDEXING=true를 명시한 후 재빌드해야 색인이 허용된다. 도메인만 지정해도 자동으로 색인을 허용하지 않는다.
+- 이후 main 변경은 Cloudflare에서 자동 빌드·배포한다. 롤백은 Cloudflare Pages 배포 목록에서 이전 성공 배포로 수행한다.
+
+아래 연결 확인 기록은 최초 배포 전의 이력이며, 현재 상태는 위 배포 정보를 따른다.
 
 ## 재확인 결과 (2026-10-25)
 
@@ -51,10 +63,12 @@ Cloudflare의 Workers & Pages에서 Pages 프로젝트를 만들고 GitHub 저�
 ```text
 NEXT_PUBLIC_SITE_URL=https://실제-도메인
 NEXT_PUBLIC_CONTACT_EMAIL=실제-문의-이메일
+# 운영자/문의/정책을 완성한 정식 공개 시에만 설정
+NEXT_PUBLIC_ALLOW_INDEXING=true
 NEXT_TELEMETRY_DISABLED=1
 ```
 
-NEXT_PUBLIC 값은 공개되는 설정이므로 비밀키를 넣지 않는다. 도메인 미설정 시 noindex와 robots Disallow가 적용된다. 배포 미리보기 환경에는 운영 도메인 변수를 넣지 않아 색인을 막는다. 운영 환경변수 변경 뒤 반드시 새로 빌드한다.
+NEXT_PUBLIC 값은 공개되는 설정이므로 비밀키를 넣지 않는다. 도메인 미설정 또는 NEXT_PUBLIC_ALLOW_INDEXING이 true가 아니면 noindex와 robots Disallow가 적용된다. 배포 미리보기 환경에는 운영 도메인 변수를 넣지 않아 색인을 막는다. 운영 환경변수 변경 뒤 반드시 새로 빌드한다.
 
 빌드 결과에는 `_headers`와 PDF.js worker가 포함된다. SPA fallback을 강제로 걸지 않는다. trailing slash 경로의 실제 index.html을 제공한다. 정적 export이므로 Pages Functions나 Node 서버는 필요 없다.
 
