@@ -9,7 +9,7 @@
 - 빌드 환경: NODE_VERSION=24, NEXT_TELEMETRY_DISABLED=1, NEXT_PUBLIC_SITE_URL=https://filefit-59l.pages.dev
 - 최초 배포 커밋: 679670a678d9c06b055e9108a7265ec6373ff6c6
 - 해당 커밋의 GitHub 자동 검증: https://github.com/sfd1033/filefit/actions/runs/40179300178 (success)
-- 운영자/문의/정책 확인이 끝날 때까지 검색 차단. NEXT_PUBLIC_ALLOW_INDEXING=true를 명시한 후 재빌드해야 색인이 허용된다. 도메인만 지정해도 자동으로 색인을 허용하지 않는다.
+- 공개 운영자: Mozzie King. 문의: studyfordream1033@gmail.com. 연락처와 정책을 게시했으며 Production에 NEXT_PUBLIC_ALLOW_INDEXING=true를 설정하고 재빌드하면 검색이 허용된다. Preview는 해당 값을 설정하지 않아 검색 차단을 유지한다. 도메인만 지정해도 자동으로 색인을 허용하지 않는다.
 - 이후 main 변경은 Cloudflare에서 자동 빌드·배포한다. 롤백은 Cloudflare Pages 배포 목록에서 이전 성공 배포로 수행한다.
 
 아래 연결 확인 기록은 최초 배포 전의 이력이며, 현재 상태는 위 배포 정보를 따른다.
